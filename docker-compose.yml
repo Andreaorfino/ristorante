@@ -1,0 +1,47 @@
+version: "3.7"
+
+services:
+  express_cucina:
+    image: node:12-alpine
+    command: sh -c "npm install && npm run start:dev"
+    ports:
+      - target: 8080
+        published: 1001 
+        protocol: tcp
+        mode: host
+    working_dir: /express_cucina
+    volumes:
+      - ./express_cucina:/express_cucina
+    environment:
+      SECRET: secret
+
+  node_cameriere:
+    image: node:12-alpine
+    command: sh -c "npm install && npm run start:dev"
+    ports:
+      - target: 8080
+        published: 1002
+        protocol: tcp
+        mode: host
+    working_dir: /node_cameriere
+    volumes:
+      - ./node_cameriere:/node_cameriere
+    environment:
+      SECRET: secret
+
+  flask_cliente:
+    image: python:3.7-alpine
+    command: sh -c "pip install -r requirements.txt && python -m pip install requests && flask run --host=0.0.0.0"
+    ports:
+      - target: 5000
+        published: 8000
+        protocol: tcp
+        mode: host
+    working_dir: /flask_cliente
+    volumes:
+      - ./flask_cliente:/flask_cliente
+    environment:
+      SECRET: secret
+
+  digger_machine:
+    image: nicolaka/netshoot

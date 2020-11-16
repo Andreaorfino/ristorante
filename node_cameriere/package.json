@@ -1,0 +1,14 @@
+{
+  "name": "node_cameriere",
+  "version": "1.0.0",
+  "description": "cameriere che serve",
+  "main": "app.js",
+  "scripts": {
+    "start:dev": "nodemon app.js"
+  },
+  "author": "Andreaorfino",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
